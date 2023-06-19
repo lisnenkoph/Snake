@@ -45,17 +45,19 @@ def gameLoop():
     x = 270
     y = 180
 
-    foodx = round(random.randrange(0, 540 - snake) / 10) * 10
+    foodx = round(random.randrange(0, 540 - snake) / 10) * 10 #определение позиции яблока
     foody = round(random.randrange(0, 360 - snake) / 10) * 10
+    #определение золотого яблока
     gold_apple_x = -1
     gold_apple_y = -1
     gold_apple_timer = time.time()
 
     xc = 0
-    yc = 0
+    yc = 0 
+    #задание изначальной змейки
     snake_list = []
-    snake_len = 1
-    lives = 1
+    snake_len = 1 
+    lives = 1 
     is_accelerated = False
 
     while not over:      # Проверка, закончилась ли игра
@@ -113,8 +115,8 @@ def gameLoop():
 
         if x == foodx and y == foody:
             snake_len += 1
-            foodx = round(random.randrange(0, 540 - snake) / 10) * 10
-            foody = round(random.randrange(0, 360 - snake) / 10) * 10
+            foodx = round(random.randrange(0, 540 - snake) / 10) * 10 
+            foody = round(random.randrange(0, 360 - snake) / 10) * 10 
 
         if x == gold_apple_x and y == gold_apple_y:
             snake_len += 3
