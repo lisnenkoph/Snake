@@ -58,3 +58,49 @@ foodx = round(random.randrange(0, 540 - snake) / 10) * 10
     lives = 1
     is_accelerated = False
 
+    while not over:      # Проверка, закончилась ли игра
+
+        while close == True:
+            dis.fill(CYAN)       # Заполнение экрана цветом CYAN
+            message("Game over! 'r' - restart, q - 'quit'", BLACK) # Отображение сообщения игроку
+            pygame.display.update()     # Обновление дисплея
+
+            for event in pygame.event.get():        # Проверка событий, таких как нажатия клавиш
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_q:     # Если пользователь нажимает 'q', завершить игру
+                        over = True
+                        close = False
+                    if event.key == pygame.K_r:     # Если пользователь нажимает 'r', перезапустить игру
+                        gameLoop()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                over = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:        # Двигать змейку вверх, если пользователь нажимает стрелку вверх
+                    yc = -snake
+                    xc = 0
+                elif event.key == pygame.K_DOWN:    # Двигать змейку вниз, если пользователь нажимает стрелку вниз
+                    yc = snake
+                    xc = 0
+                elif event.key == pygame.K_LEFT:    # Двигать змейку влево, если пользователь нажимает стрелку влево
+                    xc = -snake
+                    yc = 0
+                elif event.key == pygame.K_RIGHT:   # Двигать змейку вправо, если пользователь нажимает стрелку вправо
+                    xc = snake
+                    yc = 0
+                elif event.key == pygame.K_LSHIFT:  # Ускорить змейку, если пользователь удерживает клавишу левого shift
+                    is_accelerated = True
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LSHIFT:
+                    is_accelerated = False
+
+        if x >= 540 or x < 0 or y >= 360 or y < 0:  # Проверка столкновения змейки со стенами игровой области
+            close = True
+        x += xc     # Обновление позиции змейки на основе текущего направления движения
+        y += yc
+
+        if x >= 540 or x < 0 or y >= 360 or y < 0:  # Повторная проверка столкновения змейки со стенами игровой области
+            close = True
+
+        dis.fill(CYAN)
