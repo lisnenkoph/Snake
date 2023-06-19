@@ -44,3 +44,17 @@ def gameLoop():
 
     x = 270
     y = 180
+
+foodx = round(random.randrange(0, 540 - snake) / 10) * 10
+    foody = round(random.randrange(0, 360 - snake) / 10) * 10
+    gold_apple_x = -1
+    gold_apple_y = -1
+    gold_apple_timer = time.time()
+
+    xc = 0
+    yc = 0
+    snake_list = []
+    snake_len = 1
+    lives = 1
+    is_accelerated = False
+
