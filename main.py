@@ -7,6 +7,7 @@ pygame.init()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 25)
 
+#задание цветов игры
 BLACK = (0, 0, 0)
 RED = (209, 3, 3)
 GREEN = (0, 255, 0)
@@ -113,11 +114,13 @@ def gameLoop():
                 gold_apple_y = round(random.randrange(0, 360 - snake) / 10) * 10
                 gold_apple_timer = time.time()
 
+        #добавление длины к змейке при попадании на яблоко
         if x == foodx and y == foody:
             snake_len += 1
             foodx = round(random.randrange(0, 540 - snake) / 10) * 10 
             foody = round(random.randrange(0, 360 - snake) / 10) * 10 
 
+        #добавление длины к змейке при попадании на золотое яблоко
         if x == gold_apple_x and y == gold_apple_y:
             snake_len += 3
             gold_apple_x = -1
@@ -137,6 +140,7 @@ def gameLoop():
         if len(snake_list) > snake_len:
             del snake_list[0]
 
+        #обновление змейки при проигрыше
         for i in snake_list[:-1]:
             if i == snake_Head:
                 if lives > 0:
