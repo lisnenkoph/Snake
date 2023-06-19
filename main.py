@@ -45,7 +45,7 @@ def gameLoop():
     x = 270
     y = 180
 
-foodx = round(random.randrange(0, 540 - snake) / 10) * 10
+    foodx = round(random.randrange(0, 540 - snake) / 10) * 10
     foody = round(random.randrange(0, 360 - snake) / 10) * 10
     gold_apple_x = -1
     gold_apple_y = -1
@@ -104,3 +104,25 @@ foodx = round(random.randrange(0, 540 - snake) / 10) * 10
             close = True
 
         dis.fill(CYAN)
+        
+        if gold_apple_x == -1 and gold_apple_y == -1 and time.time() - gold_apple_timer >= 8:
+            if random.randrange(150) == 0:
+                gold_apple_x = round(random.randrange(0, 540 - snake) / 10) * 10
+                gold_apple_y = round(random.randrange(0, 360 - snake) / 10) * 10
+                gold_apple_timer = time.time()
+
+        if x == foodx and y == foody:
+            snake_len += 1
+            foodx = round(random.randrange(0, 540 - snake) / 10) * 10
+            foody = round(random.randrange(0, 360 - snake) / 10) * 10
+
+        if x == gold_apple_x and y == gold_apple_y:
+            snake_len += 3
+            gold_apple_x = -1
+            gold_apple_y = -1
+
+        if gold_apple_x != -1 and gold_apple_y != -1:
+            pygame.draw.rect(dis, GOLD, [gold_apple_x, gold_apple_y, snake, snake])
+            if time.time() - gold_apple_timer >= 5:
+                gold_apple_x = -1
+                gold_apple_y = -1
