@@ -126,3 +126,34 @@ def gameLoop():
             if time.time() - gold_apple_timer >= 5:
                 gold_apple_x = -1
                 gold_apple_y = -1
+                
+       pygame.draw.rect(dis, RED, [foodx, foody, snake, snake])
+        snake_Head = []
+        snake_Head.append(x)
+        snake_Head.append(y)
+        snake_list.append(snake_Head)
+        if len(snake_list) > snake_len:
+            del snake_list[0]
+
+        for i in snake_list[:-1]:
+            if i == snake_Head:
+                if lives > 0:
+                    lives -= 1
+                    snake_len = 1
+                else:
+                    close = True
+
+        snakes(snake, snake_list)
+        scores(snake_len - 1)
+        pygame.draw.rect(dis, YELLOW, [x, y, snake, snake])
+        pygame.display.update()
+
+        if is_accelerated:
+            clock.tick(accelerated_speed)
+        else:
+            clock.tick(snake_speed)
+
+    pygame.quit()
+    quit()
+
+gameLoop()
